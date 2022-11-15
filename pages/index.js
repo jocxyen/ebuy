@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { useRef } from 'react'
 import { Banner, Header, ProductList, ReviewContainer } from '../components'
 
 export async function getStaticProps() {

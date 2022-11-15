@@ -7,7 +7,7 @@ const Header = () => {
   return (
       <header className='w-full'>
           <div className="flex  w-full p-4 px-8 items-center flex-grow gap-3">
-              <p className="font-bold  text-2xl cursor-pointer">Homely</p>
+              <p className="font-bold  text-2xl cursor-pointer">Ebuy</p>
               <div className="flex items-center flex-grow">
                 <form className='flex-1'>   
                     <label for="default-search" className="mb-2 text-sm font-medium text-slate-400 sr-only dark:text-gray-300">Search</label>
