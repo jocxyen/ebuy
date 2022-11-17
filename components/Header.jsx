@@ -2,6 +2,7 @@ import React from 'react'
 import { BiSearchAlt2, BiUser } from 'react-icons/bi'
 import { BsCart3 } from 'react-icons/bs'
 import { HiOutlineHeart } from 'react-icons/hi'
+import { useSession, signIn, signOut } from "next-auth/react"
 
 const Header = () => {
   return (
@@ -22,7 +23,7 @@ const Header = () => {
             </div>
               <div className="flex text-2xl gap-4 text-black">
                   <BiSearchAlt2 className='cursor-pointer' />
-                  <BiUser className='cursor-pointer' />
+                  <BiUser className='cursor-pointer' onClick={signIn}/>
                   <HiOutlineHeart className='cursor-pointer' />
                   <div className="relative" >
                       <BsCart3 className='cursor-pointer' />
