@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiSearchAlt2, BiUser } from 'react-icons/bi'
 import { BsCart3 } from 'react-icons/bs'
 import { HiOutlineHeart } from 'react-icons/hi'
 import { useSession, signIn, signOut } from "next-auth/react"
+import { useRouter } from "next/router";
+import { useSelector } from 'react-redux'
+import { selectItems } from '../store/cartSlice'
 
 const Header = () => {
+    const [user, setUser] = useState(false)
+    const router = useRouter()
+    const { data: session } = useSession()
+    const {cartItems} = useSelector(state=>state.cart)
   return (
+    
       <header className='w-full'>
           <div className="flex  w-full p-4 px-8 items-center flex-grow gap-3">
-              <p className="font-bold  text-2xl cursor-pointer">Ebuy</p>
+              <p className="font-bold  text-2xl cursor-pointer" onClick={()=>router.push('/')}>Ebuy</p>
               <div className="flex items-center flex-grow">
                 <form className='flex-1'>   
                     <label for="default-search" className="mb-2 text-sm font-medium text-slate-400 sr-only dark:text-gray-300">Search</label>
@@ -21,13 +29,19 @@ const Header = () => {
                     </div>
                 </form>
             </div>
-              <div className="flex text-2xl gap-4 text-black">
+              <div className="flex relative text-2xl gap-4 text-black">
                   <BiSearchAlt2 className='cursor-pointer' />
-                  <BiUser className='cursor-pointer' onClick={signIn}/>
+                  <BiUser className='cursor-pointer' onClick={()=>setUser(!user)} />
+                  {user&&<div className="absolute w-36 z-50 text-xs text-gray-500 top-11 bg-white">
+                      <p className="p-2">{ session? `Hello, ${session.user.name}`: 'Please login to continue'}</p>
+                      {!session?.user?.name && <><p className="p-4 hover:text-black transition-all cursor-pointer" onClick={signIn}>Login</p>
+                      <p className="p-4 hover:text-black transition-all cursor-pointer">Register</p></>}
+                      <p className="p-4 hover:text-black transition-all cursor-pointer" onClick={signOut}>Logout</p>
+                  </div>}
                   <HiOutlineHeart className='cursor-pointer' />
                   <div className="relative" >
-                      <BsCart3 className='cursor-pointer' />
-                      <p className="text-white bg-red-600 px-1.5 rounded-full text-xs font-bold text-center absolute -top-1 -right-3">2</p>
+                      <BsCart3 className='cursor-pointer' onClick={()=>router.push('/cart')}/>
+                      <p className="text-white bg-red-600 px-1.5 rounded-full text-xs font-bold text-center absolute -top-1 -right-3" >{cartItems.length}</p>
                   </div>
             </div>
           </div>
