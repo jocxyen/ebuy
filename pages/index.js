@@ -24,7 +24,7 @@ export default function Home({ products }) {
   const dispatch = useDispatch()
   const { cartItems } = useSelector(state  => state.cart);
   useEffect(() => {
-    dispatch(fetchCart(JSON.parse(localStorage.getItem('cart') || [])))
+    dispatch(fetchCart(JSON.parse(localStorage?.getItem('cart') || [])))
     console.log("run")
   },[dispatch])
   return (
