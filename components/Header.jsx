@@ -11,7 +11,7 @@ const Header = () => {
     const [user, setUser] = useState(false)
     const router = useRouter()
     const { data: session } = useSession()
-    const {cartItems} = useSelector(state=>state.cart)
+    const cartItems = useSelector(selectItems)
   return (
     
       <header className='w-full'>

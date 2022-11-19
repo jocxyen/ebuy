@@ -1,10 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTrash } from "react-icons/fa"
-import { addToCart, removeFromCart, removeProduct } from '../store/cartSlice';
+import { addToCart, removeFromCart, removeProduct, selectItems } from '../store/cartSlice';
 
 const Cart = () => {
-  const { cartItems } = useSelector(state => state.cart);
+
+  const cartItems = useSelector(selectItems)
   const total = () => {
     let totalPrice = 0
     if (cartItems.length > 0) {
